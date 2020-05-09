@@ -1,0 +1,35 @@
+{
+  "name": "guula-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giselesousar/guula-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giselesousar/guula-backend/issues"
+  },
+  "homepage": "https://github.com/giselesousar/guula-backend#readme",
+  "dependencies": {
+    "celebrate": "^12.1.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+<<<<<<< HEAD
+=======
+    "crypto-js": "^4.0.0",
+>>>>>>> 3752eae0ab7dbf1da6f03096b1487d75ca6d6b07
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
