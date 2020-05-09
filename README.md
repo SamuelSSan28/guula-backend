@@ -1,6 +1,6 @@
-# guula-backend
+# Guula-Backend
 
-<<<<<<< HEAD
+
 ## :rocket: Tecnologias
 
 Esse projeto foi desenvolvido utilizando:
