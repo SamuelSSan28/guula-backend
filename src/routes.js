@@ -9,7 +9,7 @@ const routes = express.Router();
 
 routes.get('/favorites', FavoritesController.index);
 routes.post('/favorites', FavoritesController.create);
-routes.delete('/favorites', FavoritesController.delete);
+routes.delete('/favorites/:id', FavoritesController.delete);
 routes.get('/users', UserController.index);
 
 routes.post("/users/login",celebrate({

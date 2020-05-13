@@ -9,13 +9,16 @@ module.exports = {
         const [count] = await connection('receitas_usuarios').where('usuario_id', usuario_id).count();
         response.header('X-total-count', count['count(*)']);
 
-        const incidents = await connection('receitas')
+        const receitas = await connection('receitas')
             .join('receitas_usuarios', 'receitas.id', '=', 'receitas_usuarios.receita_id')
             .select([
-                'receitas.*', 
+                'receitas.*',
+                'receitas_usuarios.id',
+                'receitas_usuarios.usuario_id',
+                'receitas_usuarios.receita_id' 
             ] );
 
-        return response.json(incidents);
+        return response.json(receitas);
     },
 
     async create(request, response){
