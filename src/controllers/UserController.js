@@ -18,7 +18,7 @@ module.exports = {
         } 
 
         const senha = SHA256(senha_p).toString(); 
-		const email = SHA256(email_p).toString(); 
+		    const email = SHA256(email_p).toString(); 
 
         await connection('usuarios').insert({
           //id,
