@@ -29,6 +29,7 @@ module.exports = {
 	  
 	    async recibe_by_category(request, response) {
         var { categoria} = request.body;
+
         const usuarios = await connection('receitas').where("categoria","=",categoria).select('*');
         const [count] = await connection('receitas').where("categoria","=",categoria).count();
 
@@ -53,6 +54,5 @@ module.exports = {
         
         response.header("Total_Receitas_by_Ingredientes",count)
         return response.json(receitas_encontradas);
-
       }
 }
