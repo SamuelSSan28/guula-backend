@@ -46,7 +46,7 @@ routes.post("/users",celebrate({
     })} 
     ),UserController.create); 
 
-routes.get('/recipes',celebrate({
+routes.post('/recipes',celebrate({
     [Segments.BODY] : Joi.object().keys({
         titulo:Joi.string().required(),
         categoria:Joi.string().required(),
@@ -56,7 +56,9 @@ routes.get('/recipes',celebrate({
         modo_preparo:Joi.string().required(),
         imagem:Joi.string().required()
     })}
-    ),RecipeController.index);
+    ),RecipeController.create);
+
+routes.get('/recipes',RecipeController.index);
 
 routes.get('/recipes/ingredients',celebrate({
     [Segments.BODY] : Joi.object().keys({
