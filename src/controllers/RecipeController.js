@@ -27,7 +27,7 @@ module.exports = {
         return response.json(usuarios);
       },
 	  
-	    async recibe_by_category(request, response) {
+	    async recipe_by_category(request, response) {
         var { categoria} = request.body;
 
         const usuarios = await connection('receitas').where("categoria","=",categoria).select('*');
@@ -37,7 +37,29 @@ module.exports = {
         return response.json(usuarios);
       },
 
-      async recibe_by_ingredients(request, response) {
+      async recipe_random(request, response) {
+        var list_ids = [];
+        const { quant } = request.params;
+        var receita = ""
+        var receitas = []
+
+        console.log(quant)
+
+        while(list_ids.length < quant){
+            var random_id = Math.floor((Math.random() * 7000)+ 1)
+            console.log((Math.random() * 100)+ 1)
+
+            if(list_ids.indexOf(random_id) == -1 ){
+              list_ids.push(random_id)
+              receita = await connection('receitas').where("id","=",random_id).select('*');
+              receitas.push(receita[0])
+            }
+        }
+
+        return response.json(receitas);
+      },
+
+      async recipe_by_ingredients(request, response) {
         var { ingredientes} = request.body;
         
         var lista_ingredientes = ingredientes.split(" ");
