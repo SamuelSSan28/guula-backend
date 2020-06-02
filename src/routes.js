@@ -74,7 +74,7 @@ routes.get('/recipes/category',celebrate({
     ),RecipeController.recipe_by_category);
 
 routes.get('/recipes/random/:quant',celebrate({
-        [Segments.PARAMS] : Joi.object().keys({
+        [Segments.HEADERS] : Joi.object().keys({
             quant:Joi.number().required(),
         })}), RecipeController.recipe_random);
 

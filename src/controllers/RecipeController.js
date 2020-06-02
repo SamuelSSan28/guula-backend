@@ -60,7 +60,7 @@ module.exports = {
       },
 
       async recipe_by_ingredients(request, response) {
-        var { ingredientes} = request.body;
+        var { ingredientes} = request.headers;
         
         var lista_ingredientes = ingredientes.split(" ");
 
