@@ -62,7 +62,7 @@ routes.post('/recipes',celebrate({
 routes.get('/recipes',RecipeController.index);
 
 routes.get('/recipes/ingredients',celebrate({
-    [Segments.BODY] : Joi.object().keys({
+    [Segments.HEADERS] : Joi.object().keys({
         ingredientes:Joi.string().required()
     })} 
     ),RecipeController.recipe_by_ingredients);
@@ -74,7 +74,7 @@ routes.get('/recipes/category',celebrate({
     ),RecipeController.recipe_by_category);
 
 routes.get('/recipes/random/:quant',celebrate({
-        [Segments.HEADERS] : Joi.object().keys({
+        [Segments.PARAMS] : Joi.object().keys({
             quant:Joi.number().required(),
         })}), RecipeController.recipe_random);
 
