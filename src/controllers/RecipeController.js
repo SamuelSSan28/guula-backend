@@ -63,7 +63,9 @@ module.exports = {
         var { ingredientes} = request.headers;
         
         var lista_ingredientes = ingredientes.split(" ");
-
+		
+		console.log(lista_ingredientes);
+		
         var query = "SELECT * FROM receitas WHERE ingredientes LIKE "+"'%"+lista_ingredientes[0]+"%'";
 
         for(var i = 1; i < lista_ingredientes.length; i++){
