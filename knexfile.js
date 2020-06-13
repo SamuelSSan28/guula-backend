@@ -3,30 +3,33 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+   client: 'sqlite3',
     connection: {
       filename: './src/database/guula.sqlite'
-    },
-    migrations: { 
-      directory: './src/database/migrations' 
-    }, 
-    useNullAsDefault: true,
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './src/database/migrations'
+    },
+    useNullAsDefault: true,
+  },
+
+  staging: {
+    client: 'mysql',
+    connection: {
+	  host:"sql200.epizy.com",
+      database: 'epiz_25956277_guula',
+      user:     'epiz_25956277',
+      password: 'password'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    
   },
 
   production: {
