@@ -6,11 +6,15 @@ module.exports = {
 
         const usuario_id = request.headers.authorization;
 
+        const { page = 1 } = request.query;
+
         const [count] = await connection('receitas_usuarios').where('usuario_id', usuario_id).count();
         response.header('Total_Receitas_Favoritas', count['count(*)']);
 
         const receitas = await connection('receitas').where('usuario_id', usuario_id)
             .join('receitas_usuarios', 'receitas.id', '=', 'receitas_usuarios.receita_id')
+            .limit(10)
+            .offset((page-1)*10)
             .select([
                 'receitas.*',
                 'receitas_usuarios.id',
@@ -44,7 +48,6 @@ module.exports = {
         /*
         const receita_usuario = await connection('receitas_usuarios').where('receita_id', id).andWhere("usuario_id",usuario_id)
         .select('*');
-
         if(!receita_usuario.length){
             return response.status(401).json({ error: 'operation not permitted' });
         }

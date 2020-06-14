@@ -9,7 +9,9 @@ const {celebrate,Segments,Joi} = require('celebrate')
 const routes = express.Router(); 
 
 routes.get('/favorites',celebrate({
-
+    [Segments.QUERY]:{
+        page: Joi.number().required()
+    },
     [Segments.HEADERS] : Joi.object({authorization: Joi.string().required(),}).unknown()
 
 }),FavoritesController.index);
@@ -59,7 +61,11 @@ routes.post('/recipes',celebrate({
     })}
     ),RecipeController.create);
 
-routes.get('/recipes',RecipeController.index);
+    routes.get('/recipes', celebrate({
+        [Segments.QUERY]:{
+            page: Joi.number().required()
+        }
+}), RecipeController.index);
 
 routes.get('/recipes/category',celebrate({
     [Segments.BODY] : Joi.object().keys({
