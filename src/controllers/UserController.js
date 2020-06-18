@@ -15,7 +15,7 @@ module.exports = {
         } 
 
         const senha = SHA256(senha_p).toString(); 
-		    const email = SHA256(email_p).toString(); 
+		const email = SHA256(email_p).toString(); 
 
         await connection('usuarios').insert({
           //id,
@@ -35,7 +35,7 @@ module.exports = {
 
       async login(request, response) {
         const { senha_p, email_p} = request.body;
-const email = SHA256(email_p).toString(); 
+		const email = SHA256(email_p).toString(); 
         const senha_comp = SHA256(senha_p).toString();
         const id_senha = await connection('usuarios').where('email',email).select('id','senha').first();
         

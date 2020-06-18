@@ -62,19 +62,29 @@ module.exports = {
         return response.json(receitas);
       },
 
+      async recipe_by_id(request, response) {
+        const { id } = request.params;
+
+        const receita = await connection('receitas').where("id","=",id).select('*').first()
+
+        if(!receita){
+          return response.status(401).json({error : "receita não cadastrada !"});
+        }
+
+        return response.json({"status":true});
+      },
+
       async recipe_by_ingredients(request, response) {
         var { ingredientes} = request.headers;
         
         var lista_ingredientes = ingredientes.split(" ");
-		
-		console.log(lista_ingredientes);
+	
 		
         var query = "SELECT * FROM receitas WHERE ingredientes LIKE "+"'%"+lista_ingredientes[0]+"%'";
 
         for(var i = 1; i < lista_ingredientes.length; i++){
           query += " and ingredientes LIKE "+"'%"+lista_ingredientes[i]+"%'"
         }
-        console.log(query);
 
         var receitas_encontradas = await connection.raw(query);
         var count = Object.keys(receitas_encontradas).length;
