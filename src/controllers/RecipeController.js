@@ -68,7 +68,7 @@ module.exports = {
         const receita = await connection('receitas').where("id","=",id).select('*').first()
 
         if(!receita){
-          return response.status(401).json({error : "receita não cadastrada !"});
+          return response.json({"status":false});
         }
 
         return response.json({"status":true});
