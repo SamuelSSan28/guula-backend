@@ -8,48 +8,7 @@ const {celebrate,Segments,Joi} = require('celebrate')
 
 const routes = express.Router(); 
 
-routes.get('/favorites',celebrate({
-    [Segments.QUERY]:{
-        page: Joi.number().required()
-    },
-    [Segments.HEADERS] : Joi.object({authorization: Joi.string().required(),}).unknown()
-
-}),FavoritesController.index);
-
-routes.post('/favorites',celebrate({
-    
-    [Segments.HEADERS] : Joi.object({authorization: Joi.string().required()}).unknown(),
-
-    [Segments.BODY] : Joi.object().keys({receita_id:Joi.number().required()})
-
-}) ,FavoritesController.create);    
-
-routes.delete('/favorites/:id',celebrate({
-    [Segments.PARAMS] : Joi.object().keys({
-        id:Joi.number().required(),
-    })}), FavoritesController.delete);
-
-
-routes.get('/users', UserController.index);
-
-routes.post("/users/login",celebrate({
-
-    [Segments.BODY] : Joi.object().keys({
-        email_p:Joi.string().required().email(),
-        senha_p:Joi.string().required()
-    })} 
-    ),UserController.login);
-
-routes.post("/users",celebrate({
-
-    [Segments.BODY] : Joi.object().keys({
-        nome:Joi.string().required(),
-        email_p:Joi.string().required().email(),
-        senha_p:Joi.string().required()
-    })} 
-    ),UserController.create); 
-
-routes.post('/recipes',celebrate({
+routes.post('/recipes',celebrate({  //Cadastrar receitas
     [Segments.BODY] : Joi.object().keys({
         titulo:Joi.string().required(),
         categoria:Joi.string().required(),
@@ -61,11 +20,16 @@ routes.post('/recipes',celebrate({
     })}
     ),RecipeController.create);
 
-    routes.get('/recipes', celebrate({
+
+
+routes.get('/recipes', celebrate({ 
         [Segments.QUERY]:{
             page: Joi.number().required()
         }
-}), RecipeController.index);
+        }), RecipeController.index);
+
+
+/*
 
 routes.get('/recipes/category',celebrate({
     [Segments.BODY] : Joi.object().keys({
@@ -73,12 +37,18 @@ routes.get('/recipes/category',celebrate({
     })}
     ),RecipeController.recipe_by_category);
 	
+*/
 
-routes.get('/recipes/ingredientes',RecipeController.recipe_by_ingredients); 
 
-routes.get('/recipes/id/:id',celebrate({
+routes.get('/recipes/ingredientes',RecipeController.recipe_by_ingredients); //Receitas por Ingredientes
+
+
+
+routes.get('/recipes/id/:id',celebrate({     //Receita po ID
         [Segments.PARAMS] : Joi.object().keys({
             id:Joi.number().required(),
         })}), RecipeController.recipe_by_id);
+
+
 
 module.exports = routes; //exportando as rotas
