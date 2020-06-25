@@ -8,6 +8,7 @@ exports.up = function(knex) {
       table.string('rendimento').notNullable();
       table.string('ingredientes').notNullable();
       table.string('modo_preparo').notNullable();
+	  table.string('dificuldade').notNullable();
       table.string('imagem').notNullable();
 
     });

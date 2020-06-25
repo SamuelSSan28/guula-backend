@@ -1,8 +1,6 @@
 const express = require('express');
 
-const UserController = require('./controllers/UserController');
 const RecipeController = require('./controllers/RecipeController');
-const FavoritesController = require('./controllers/FavoritesController');
 
 const {celebrate,Segments,Joi} = require('celebrate') 
 
