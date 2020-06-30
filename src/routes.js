@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const RecipeController = require('./controllers/RecipeController');
@@ -28,7 +29,6 @@ routes.get('/recipes', celebrate({
 
 
 /*
-
 routes.get('/recipes/category',celebrate({
     [Segments.BODY] : Joi.object().keys({
         categoria:Joi.string().required()
@@ -47,6 +47,10 @@ routes.get('/recipes/id/:id',celebrate({     //Receita po ID
             id:Joi.number().required(),
         })}), RecipeController.recipe_by_id);
 
-
+routes.get('/recipes/ids/:ids', celebrate({
+    [Segments.PARAMS] : Joi.object().keys({
+        ids: Joi.string().required(),
+    }) 
+}), RecipeController.recipe_ids)
 
 module.exports = routes; //exportando as rotas

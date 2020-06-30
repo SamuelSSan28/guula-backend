@@ -91,5 +91,15 @@ module.exports = {
         
         response.header("Total_Receitas_by_Ingredientes",count)
         return response.json(receitas_encontradas);
-      }
+      },
+      async recipe_ids(request, response) {
+        const { ids } = request.params;
+        
+        const i = (ids.split(',')).map(id => {
+          return Number(id);
+        })
+        const receitas = await connection('receitas').whereIn('id', i).select('*');
+
+        return response.json(receitas)
+      },
 }
