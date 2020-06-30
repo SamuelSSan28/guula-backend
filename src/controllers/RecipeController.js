@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const connection = require ('../database/connection');
-
+const utf8 = require('utf8');
 
 module.exports = {
     async create(request, response) { 
@@ -78,7 +78,7 @@ module.exports = {
         var { ingredientes} = request.headers;
         
         var lista_ingredientes = ingredientes.split(" ");
-	
+        
 		
         var query = "SELECT * FROM receitas WHERE ingredientes LIKE "+"'%"+lista_ingredientes[0]+"%'";
 
@@ -86,6 +86,7 @@ module.exports = {
           query += " and ingredientes LIKE "+"'%"+lista_ingredientes[i]+"%'"
         }
 
+        query = utf8.decode(query)
         var receitas_encontradas = await connection.raw(query);
         var count = Object.keys(receitas_encontradas).length;
         

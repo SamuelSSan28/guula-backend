@@ -29,7 +29,8 @@
     "knex": "^0.21.1",
     "mogoose": "0.0.1-security",
     "mysql": "^2.18.1",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
