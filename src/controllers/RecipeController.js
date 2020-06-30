@@ -23,8 +23,8 @@ module.exports = {
         const [count] = await connection('receitas').count();
         const {page = 1} = request.query;
         const receitas = await connection('receitas')
-          .limit(20)
-          .offset((page-1) * 20)
+          .limit(10)
+          .offset((page-1) * 10)
           .select('*');
         response.header("Total_Receitas",count["count(*)"])
         return response.json(receitas);
