@@ -75,17 +75,50 @@ module.exports = {
       },
 
       async recipe_by_ingredients(request, response) {
-        var { ingredientes} = request.headers;
-        
-        var lista_ingredientes = ingredientes.split(" ");
-        
-		
-        var query = "SELECT * FROM receitas WHERE ingredientes LIKE "+"'%"+utf8.decode(lista_ingredientes[0])+"%'";
-
-        for(var i = 1; i < lista_ingredientes.length; i++){
-          query += " and ingredientes LIKE "+"'%"+utf8.decode(lista_ingredientes[i])+"%'"
+        const decode = { 
+        '2': 'ã',
+        '3': 'ç',
+        '4': 'õ',
+        '5': 'á',
+        '6': 'é',
+        '7': 'í',
+        '8': 'ó',
+        '9': 'ú',
+        '10': 'â',
+        '11': 'ê',
+        '12': 'î',
+        '13': 'ô',
+        '14': 'û'
         }
 
+        var { ingredientes} = request.headers;
+
+        var lista_ingredientes = ingredientes.split(" ");
+        
+        var lista_ingredientes_decode = []
+
+        for(var i = 0; i < lista_ingredientes.length; i++){
+          var ingrid = ""
+          for(var j = 0; j < lista_ingredientes[i].length; j++){
+            if(Object.keys(decode).includes(lista_ingredientes[i][j])){
+              ingrid += decode[lista_ingredientes[i][j]]
+            }
+            else{
+              ingrid += lista_ingredientes[i][j]
+            }
+          }
+          lista_ingredientes_decode.push(ingrid)
+        }
+
+        console.log(lista_ingredientes_decode)
+
+        var query = "SELECT * FROM receitas WHERE ingredientes LIKE "+"'%"+lista_ingredientes_decode[0]+"%'";
+
+        for(var i = 1; i < lista_ingredientes_decode.length; i++){
+          query += " and ingredientes LIKE "+"'%"+lista_ingredientes_decode[i]+"%'"
+        }
+
+        console.log(ingredientes)
         console.log(query)
         var receitas_encontradas = await connection.raw(query);
         var count = Object.keys(receitas_encontradas).length;
